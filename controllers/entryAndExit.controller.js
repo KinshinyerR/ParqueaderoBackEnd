@@ -72,7 +72,8 @@ async function getNoContrato(req, res) {
 }
 
 async function createEntry(req, res) {
-  const { placa } = req.body;
+  const { placa, horaIngreso } = req.body;
+  console.log(horaIngreso);
   try {
     const userDB = await User.findOne({ placa: placa });
     if (userDB) {
