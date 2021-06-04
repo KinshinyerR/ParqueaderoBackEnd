@@ -73,8 +73,7 @@ async function getNoContrato(req, res) {
 }
 
 async function createEntry(req, res) {
-  const { placa, horaIngreso } = req.body;
-  console.log(horaIngreso);
+  const { placa} = req.body;
   try {
     const userDB = await User.findOne({ placa: placa });
     if (userDB) {
@@ -88,8 +87,8 @@ async function createEntry(req, res) {
         const newUser = new User();
         newUser.placa = clientDB.placa;
         newUser.color = clientDB.color;
-        // newUser.horaIngreso = moment().format();
-        newUser.horaIngreso = moment.tz(horaIngreso, "America/Bogota");
+        newUser.horaIngreso = moment().format();
+        // newUser.horaIngreso = moment.tz(horaIngreso, "America/Bogota");
         newUser.contratoMensual = true;
         estacionados++;
         await newUser.save();
