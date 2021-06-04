@@ -130,6 +130,7 @@ async function createExit(req, res) {
     console.log(Math.floor(time.asMinutes()));
     console.log(userDB.valorAPagar);
 
+    estacionados--;
     res.status(200).send(userDB);
     userDB.remove({ placa: placa });
   } catch (error) {
