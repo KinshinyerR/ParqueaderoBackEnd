@@ -88,7 +88,7 @@ async function createEntry(req, res) {
         newUser.placa = clientDB.placa;
         newUser.color = clientDB.color;
         // newUser.horaIngreso = moment().format();
-        newUser.horaIngreso = horaIngreso;
+        newUser.horaIngreso = moment.parseZone(horaIngreso);
         newUser.contratoMensual = true;
         estacionados++;
         await newUser.save();
