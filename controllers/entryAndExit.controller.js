@@ -95,7 +95,7 @@ async function createEntry(req, res) {
         res.send(newUser);
       }
     } else {
-      if (estacionados < miParqueadero - 5) {
+      if (estacionados < miParqueadero) {
         const newUser = new User();
         newUser.placa = req.body.placa;
         newUser.color = req.body.color;
