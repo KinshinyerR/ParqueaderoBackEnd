@@ -90,7 +90,7 @@ async function createEntry(req, res) {
         const newUser = new User();
         newUser.placa = clientDB.placa;
         newUser.color = clientDB.color;
-        newUser.horaIngreso = moment(horaIngreso).format();
+        newUser.horaIngreso = horaIngreso;
         // newUser.horaIngreso = moment.tz("America/Bogota").format();
         newUser.contratoMensual = true;
         estacionados++;
@@ -102,7 +102,7 @@ async function createEntry(req, res) {
         const newUser = new User();
         newUser.placa = req.body.placa;
         newUser.color = req.body.color;
-        newUser.horaIngreso = moment(horaIngreso).format();
+        newUser.horaIngreso = horaIngreso;
         // newUser.horaIngreso = moment.tz("America/Bogota").format();
         newUser.contratoMensual = false;
         estacionados++;
