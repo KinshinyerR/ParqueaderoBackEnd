@@ -1,8 +1,8 @@
 const express = require("express");
 const { body, param } = require("express-validator");
 const mongoose = require("mongoose");
-const moment = require("moment");
-const momentTimezone = require("moment-timezone")
+var moment = require("moment-timezone");
+
 moment.locale("es");
 
 const Client = require("../models/monthlyClients.model");
@@ -73,7 +73,7 @@ async function getNoContrato(req, res) {
 }
 
 async function createEntry(req, res) {
-  const { placa} = req.body;
+  const { placa } = req.body;
   try {
     const userDB = await User.findOne({ placa: placa });
     if (userDB) {
@@ -87,8 +87,8 @@ async function createEntry(req, res) {
         const newUser = new User();
         newUser.placa = clientDB.placa;
         newUser.color = clientDB.color;
-        newUser.horaIngreso = moment().format();
-        // newUser.horaIngreso = moment.tz(horaIngreso, "America/Bogota");
+        // newUser.horaIngreso = moment().format();
+        newUser.horaIngreso = moment.tz("America/Bogota").format();
         newUser.contratoMensual = true;
         estacionados++;
         await newUser.save();
@@ -99,7 +99,8 @@ async function createEntry(req, res) {
         const newUser = new User();
         newUser.placa = req.body.placa;
         newUser.color = req.body.color;
-        newUser.horaIngreso = moment().format();
+        // newUser.horaIngreso = moment().format();
+        newUser.horaIngreso = moment.tz("America/Bogota").format();
         newUser.contratoMensual = false;
         estacionados++;
         await newUser.save();
@@ -121,7 +122,8 @@ async function createExit(req, res) {
     if (!userDB) {
       throw new Error("El vehículo no se encuentra en el Parqueadero");
     }
-    let now = moment();
+    // let now = moment();
+    let now = moment.tz("America/Bogota").format();
     userDB.horaSalida = now;
     let before = moment(userDB.horaIngreso);
     const time = moment.duration(now.diff(before));
